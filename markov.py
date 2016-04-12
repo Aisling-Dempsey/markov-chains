@@ -53,9 +53,34 @@ def make_text(chains):
     """Takes dictionary of markov chains; returns random text."""
 
     text = ""
-
+    # print chains
+    i = 0
     # your code goes here
+    # try:
+    while i < 5:
+        if text == "":
 
+            key = choice(chains.keys())
+            print "key is", key
+            word1, word2 = key
+            word3 = choice(chains[key])
+            print "word3 is", word3
+            text = text + " " + word1 + " " + word2 + " " + word3
+            print text
+
+        else:
+
+            key = (word2, word3)
+            print "key is", key
+            word2 = word3
+            word3 = choice(chains[key])
+            print "word3 is", word3
+            
+            text = text + " " + word3
+            print text
+        i += 1
+    # except:
+    #     # pass    
     return text
 
 
