@@ -60,8 +60,8 @@ def make_text(chains):
             # unpacking the key 
             word1, word2 = key
             word3 = choice(chains[key])
-            
-            text = text + " " + word1 + " " + word2 + " " + word3
+            # adds words to text 
+            text = word1 + " " + word2 + " " + word3
             
 
         else:
@@ -73,7 +73,7 @@ def make_text(chains):
                 word2 = word3
                 # binds word three to a random value from the key
                 word3 = choice(chains[key])
-                     
+                # adds new word to end of text     
                 text = text + " " + word3
             
             else:
