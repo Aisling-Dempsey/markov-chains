@@ -33,7 +33,6 @@ def make_chains(text_string):
     words = []
 
     # end = len(words)
-
     for word in text_string.split():
         words.append(word)
     # your code goes here
@@ -53,34 +52,33 @@ def make_text(chains):
     """Takes dictionary of markov chains; returns random text."""
 
     text = ""
-    # print chains
-    i = 0
-    # your code goes here
-    # try:
-    while i < 5:
+    
+   
+    key = choice(chains.keys())
+    while key in chains:
         if text == "":
-
-            key = choice(chains.keys())
-            print "key is", key
+            # unpacking the key 
             word1, word2 = key
             word3 = choice(chains[key])
-            print "word3 is", word3
+            
             text = text + " " + word1 + " " + word2 + " " + word3
-            print text
+            
 
         else:
-
+            # rebbinding key to the second and third words
             key = (word2, word3)
-            print "key is", key
-            word2 = word3
-            word3 = choice(chains[key])
-            print "word3 is", word3
+            # verifying that the new key is in chains
+            if key in chains:
+                # re-binding the third word to the second
+                word2 = word3
+                # binds word three to a random value from the key
+                word3 = choice(chains[key])
+                     
+                text = text + " " + word3
             
-            text = text + " " + word3
-            print text
-        i += 1
-    # except:
-    #     # pass    
+            else:
+                continue
+           
     return text
 
 
