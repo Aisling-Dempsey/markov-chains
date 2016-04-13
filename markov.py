@@ -56,16 +56,21 @@ def make_text(chains):
 
     text = ""
     
-   
-    key = choice(chains.keys())
+    # makes sure the first key starts with an upper case. 
+    key = ("place", "holder")
+    while not key[0][0].isupper():
+        key = choice(chains.keys())
+
     while key in chains:
         if text == "":
             # unpacking the key 
             word1, word2 = key
             word3 = choice(chains[key])
-            # adds words to text 
-            text = word1 + " " + word2 + " " + word3
-            
+            if word1[0].isupper():
+                # adds words to text 
+                text = word1 + " " + word2 + " " + word3
+            else:
+                continue
 
         else:
             # rebbinding key to the second and third words
@@ -81,7 +86,23 @@ def make_text(chains):
             
             else:
                 continue
-           
+    text = text[:140]
+
+    # assigns a variable to the index of rightmost position of the punctuation
+    exclamation = text.rfind("!")
+    question = text.rfind("?")
+    period = text.rfind(".")
+
+    # find the senctence ending punctuation that is the farthest right and removes everything to the left of it.
+    if exclamation > question and exclamation > period:
+        text = text[:exclamation + 1]
+    elif question > exclamation and question > period:
+        text = text[:question + 1]
+    elif period > question and period > exclamation:
+        text = text[:period +1]
+    else:
+        make_text(chains)
+    
     return text
 
 
