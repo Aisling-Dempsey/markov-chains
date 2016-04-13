@@ -2,15 +2,16 @@ from random import choice
 import sys
 
 
-def open_and_read_file(file_path):
+def open_and_read_file(file_path1, file_path2):
     """Takes file path as string; returns text as string.
 
     Takes a string that is a file path, opens the file, and turns
     the file's contents as one string of text.
     """
-    og_text = open(file_path).read()
-
+    og_1 = open(file_path1).read()
+    og_2 = open(file_path2).read()
     # your code goes here
+    og_text = (og_2, og_1)
 
     return og_text
 
@@ -33,18 +34,19 @@ def make_chains(text_string):
 
     words = []
 
-    # end = len(words)
-    for word in text_string.split():
-        words.append(word)
-    # your code goes here
-    for index, word in enumerate(words[:-2]):
-        key = (word, words[index+1])
-        value = words[index+2]
-        if key in chains:
-            chains[key].append(value)
-        else:
-            chains[key] = [value]
-        # print key, value
+    for string in text_string:
+
+        for word in string.split():
+            words.append(word)
+        # your code goes here
+        for index, word in enumerate(words[:-2]):
+            key = (word, words[index+1])
+            value = words[index+2]
+            if key in chains:
+                chains[key].append(value)
+            else:
+                chains[key] = [value]
+            # print key, value
 
     return chains
 
@@ -83,10 +85,10 @@ def make_text(chains):
     return text
 
 
-input_path = sys.argv[1]
-
+input_path1 = sys.argv[1]
+input_path2 = sys.argv[2]
 # Open the file and turn it into one long string
-input_text = open_and_read_file(input_path)
+input_text = open_and_read_file(input_path1, input_path2)
 
 # Get a Markov chain
 chains = make_chains(input_text)
