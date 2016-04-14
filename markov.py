@@ -23,6 +23,8 @@ def make_chains(text_string):
     and the value would be a list of the word(s) that follow those two
     words in the input text.
 
+    where n is a number of how many words in the word-gram
+
     For example:
 
         >>> make_chains("hi there mary hi there juanita")
@@ -38,8 +40,13 @@ def make_chains(text_string):
 
         for word in string.split():
             words.append(word)
-        # your code goes here
+        # creating dictionary of words
+        # for index, word in enumerate(words[:-n]):
         for index, word in enumerate(words[:-2]):
+            # for i in range(n):
+            #     l_key.append(word[index+i])
+            #     key = tuple(l_key)
+
             key = (word, words[index+1])
             value = words[index+2]
             if key in chains:
